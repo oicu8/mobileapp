@@ -250,14 +250,14 @@ const electrumHistoryHelper = async ({ allAddresses = [], addresses = [], change
 									} catch {}
 								}));
 							}
-							
+
 							try {
 								if (isInputMatch) inputAmount = Number((inputAmount + Number(vout.value)).toFixed(8));
 								transactionInputAmount = Number((transactionInputAmount + Number(vout.value)).toFixed(8));
 							} catch {}
 						} catch {}
 					}));
-					
+
 					//Iterate over each output and add it's satoshi value to outputAmount
 					await Promise.all(decodedTransaction.vout.map(async (output) => {
 						try {
@@ -279,7 +279,7 @@ const electrumHistoryHelper = async ({ allAddresses = [], addresses = [], change
 										outputAddressMatch = true;
 									}
 								}));
-								
+
 							} catch {
 								nIndexIsUndefined = true;
 							}
@@ -318,7 +318,7 @@ const electrumHistoryHelper = async ({ allAddresses = [], addresses = [], change
 					receivedAmount = totalAmount;
 					amount = totalAmount;
 				}
-				
+
 				if (inputAddressMatch && outputAddressMatch && transactionOutputAmount === outputAmount) {
 					type = "sent";
 					amount = 0;
@@ -423,6 +423,11 @@ const fallbackBroadcastTransaction = async ({ rawTx = "", selectedCrypto = "bitc
 				break;
 			case "litecoinTestnet":
 				response = await fetch(`https://chain.so/api/v2/send_tx/ltctest`, fetchData("POST", { tx_hex: rawTx }));
+				response = await response.json();
+				response = response.status === "success" ? response.data.txid : "";
+				break;
+			case "moneybyte":
+				response = await fetch(`https://explorer.moneybyte.org/tx/`, fetchData("POST", { tx_hex: rawTx }));
 				response = await response.json();
 				response = response.status === "success" ? response.data.txid : "";
 				break;

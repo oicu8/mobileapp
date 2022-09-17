@@ -24,5 +24,11 @@
   "litecoinTestnet": [
     {"host": "electrum-ltc.bysh.me", "ssl": 51002, "tcp": 51001},
     {"host": "electrum.ltc.xurious.com", "ssl": 51002, "tcp": 51001}
+  ],
+  "moneybyte": [
+    {"host": "24.115.13.182", "ssl": 7777, "tcp": 7778},
+    {"host": "82.38.70.212", "ssl": 7777, "tcp": 7778},
+    {"host": "82.38.70.212", "ssl": 7777, "tcp": 7778},
+    {"host": "184.146.140.195", "ssl": 7777, "tcp": 7778}
   ]
 }
